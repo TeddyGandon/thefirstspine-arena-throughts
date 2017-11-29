@@ -183,7 +183,7 @@ Il est donc plus facile de traiter ces exceptions comme étant des "anomalies" s
 
 ![alt](/hooks.svg)
 
-## Situations changeantes
+## Le problème du client quantique
 
 TODO
 
