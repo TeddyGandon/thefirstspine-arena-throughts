@@ -119,9 +119,9 @@ Par exemple, dans TFS les possibilités offertes sont simples et peu variées :
 - Jouer un sort et/ou déplacer une créature et/ou placer une carte
 - Résoudre les confrontations
 
-Mais il y a un problème et pas des moindres : certaines actions necessitent plusieurs réponses de la part de l'utilisateur. Déplacer une créature requiert du joueur qu'il choisisse une créature, et qu'il choisisse une case à côté de cette même créature.
+Mais il y a un problème et pas des moindres : certaines actions necessitent plusieurs réponses de la part de l'utilisateur. Déplacer une créature requiert du joueur qu'il choisisse une créature, et qu'il choisisse une case à côté de cette même créature. Solution : découper les actions possibles en un ensemble d'instructions simples.
 
-### Les scripts
+### Les instructions
 
 
 
