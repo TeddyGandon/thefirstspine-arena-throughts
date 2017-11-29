@@ -123,7 +123,24 @@ Mais il y a un problème et pas des moindres : certaines actions necessitent plu
 
 ### Les instructions
 
+Les instructions d'une action doivent rester simples et suivre le même schéma de possibilités qu'une action. Par exemple, une instruction simple pourrait être :
 
+```
+Choisir une carte sur le plateau de jeu de type "créature"
+```
+
+L'ensemble des instructions pour déplacer une créature sur le plateau de jeu pourraient donc être :
+
+```
+Choisir une carte sur le plateau de jeu de type "créature"
+Choisir une case vide à côté de cette carte
+```
+
+Envoyer l'action au jeu au lieu de ces instructions simples présentent un avantage non négligeable : pouvoir annuler l'action en cours et en choisir une autre. Une fois que les instructions sont remplies, le joueur envoie la réponse à l'action avec le résulat des instructions de cette action.
+
+On a donc :
+
+![alt](/actions.svg)
 
 ### Le nerf de la guerre
 
