@@ -96,9 +96,36 @@ $actionWorker = Worker::factory($action);
 return $actionWorker->possibleActions();
 ```
 
+Voir le jeu comme un bac à sable offrant uniquement des possibilités plutôt que comme un ensemble de restrictions permet de déléguer les effets des actions des joueurs à des entités indépendantes et non restrictives. Notons aussi que cette vision oublie complètement les phases de jeux et ses boucles de gameplay, autorisant ainsi une possibilité d'action qui n'a pas été spécifiquement prévue par les règles.
+
 ## Actions, priorisation, conflits
 
-TODO
+Comment traiter une action ? Comment délivrer les possibilités aux joueurs ? Comment traiter les actions prioritaires ?
+
+### Actions, réponses et possibilités
+
+Nous avons vu comment était traité notre jeu, c'est à dire en un ensemble de possibilités. Ces possibilités sont des actions dont le jeu attend une réponse.
+
+```
+Réponse à une possibilité -> JEU -> Livrer les possibilités suivantes
+```
+
+Dans ce schéma, le joueur répond à une possibilité offerte par le jeu, et le jeu délivre d'autres possibilités. Ces dernières sont appelées "actions".
+
+Nombre de jeux permettent plusieurs actions à faire à la suite ou non suivant son type et sa complexité. Un jeu complexe va offrir un nombre important d'actions (Scythes, pour ne pas le citer) tandis qu'un jeu simple va donner moins d'actions au joueur (Mysterium par exemple). Attention toutefois : un jeu simple ne veut pas forcément dire qu'il n'a aucune profondeur, et l'inverse est aussi vrai.
+
+Par exemple, dans TFS les possibilités offertes sont simples et peu variées :
+- Défausser et/ou piocher
+- Jouer un sort et/ou déplacer une créature et/ou placer une carte
+- Résoudre les confrontations
+
+Mais il y a un problème et pas des moindres : certaines actions necessitent plusieurs réponses de la part de l'utilisateur. Déplacer une créature requiert du joueur qu'il choisisse une créature, et qu'il choisisse une case à côté de cette même créature.
+
+### Les scripts
+
+
+
+### Le nerf de la guerre
 
 ## Hooks et exceptions
 
