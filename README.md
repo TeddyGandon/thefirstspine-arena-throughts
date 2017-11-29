@@ -177,7 +177,11 @@ Certains effets peuvent se résoudre également lors d'un certain contexte, atte
 Il serait là aussi aisé de créer des exceptions dans le jeu au moment où le joueur lance un sort ou lorsqu'il commence son tour. Mais n'oublions pas la sandbox : nous énumérons les possibilités et non pas les restrictions. Et il existe en programmation un concept qui permet d'effectuer des executions sans pour autant modifier chaque traitement de réponse : les hooks.
 
 >Un hook (littéralement « crochet » ou « hameçon ») permet à l'utilisateur d'un logiciel de personnaliser le fonctionnement de ce dernier, en lui faisant réaliser des actions supplémentaires à des moments déterminés. Le concepteur du logiciel prévoit des hooks au long du fonctionnement de son programme, qui sont des points d'entrée vers des listes d'actions. Par défaut, le hook est généralement vide et seules les fonctionnalités de base de l'application sont exécutées. Cependant, l'utilisateur peut « accrocher » des morceaux de programme à ces hooks pour personnaliser le logiciel.
-- Wikipedia (ze référence) : https://fr.wikipedia.org/wiki/Hook_(informatique)
+— Wikipedia (ze référence) : https://fr.wikipedia.org/wiki/Hook_(informatique)
+
+Il est donc plus facile de traiter ces exceptions comme étant des "anomalies" selon le contexte.
+
+![alt](/hooks.svg)
 
 ## Situations changeantes
 
