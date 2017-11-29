@@ -100,6 +100,8 @@ return $actionWorker->possibleActions();
 
 TODO
 
+## Hookes et exceptions
+
 ## Situations changeantes
 
 TODO
