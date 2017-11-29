@@ -164,7 +164,7 @@ le jeu va demander au joueur de répondre à l'une des actions de priorité **3*
 
 Autre avantage non négligeable : ces actions ne respectent par à la lettre les usages de "tours" et de "phase de jeu". Ainsi, une action avec une priorité élevée pourra être demandée à un utilisateur pendant le tour du joueur actuel.
 
-## Hooks et exceptions
+### Hooks et exceptions
 
 Le problème des actions contradictoires étant régler, certains effets peuvent générer des actions sans aucune action de l'utilisateur. C'est le cas par exemple lorsque le texte d'une carte commence par
 
