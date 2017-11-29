@@ -144,9 +144,40 @@ On a donc :
 
 ### Le nerf de la guerre
 
+Parfois, le jeu peut demander une action supplémentaire selon le contexte. Et parfois, le contexte impose au joueur de choisir parmi plusieurs actions.
+
+Le jeu doit donc classer les actions par priorité, et envoyer au joueur uniquement les actions les plus prioritaires et qui ont la même priorité.
+
+Par exemple, sur ces actions
+
+```
+Action à priorité de 1    =>    à garder et ne pas envoyer
+Action à priorité de 1    =>    à garder et ne pas envoyer
+Action à priorité de 1    =>    à garder et ne pas envoyer
+Action à priorité de 2    =>    à garder et ne pas envoyer
+Action à priorité de 3    =>    à envoyer
+Action à priorité de 1    =>    à garder et ne pas envoyer
+Action à priorité de 3    =>    à envoyer
+```
+
+le jeu va demander au joueur de répondre à l'une des actions de priorité **3**. Le jeu va tout de même garder les actions de priorité **1** et **2** pour les proposer plus tard à l'utilisateur. Ce système de "priorisation par paquets" résoud la plupart des conflits que le jeu pourrait rencontrer lorsque, par exemple, plusieurs effets d'une action précédente entrent en contradiction avec l'autre, une action pouvant supprimer une autre action ou pouvant aussi en créer avec une priorité différente.
+
+Autre avantage non négligeable : ces actions ne respectent par à la lettre les usages de "tours" et de "phase de jeu". Ainsi, une action avec une priorité élevée pourra être demandée à un utilisateur pendant le tour du joueur actuel.
+
 ## Hooks et exceptions
 
-TODO
+Le problème des actions contradictoires étant régler, certains effets peuvent générer des actions sans aucune action de l'utilisateur. C'est le cas par exemple lorsque le texte d'une carte commence par
+
+>Au début de votre tour, ...
+
+Certains effets peuvent se résoudre également lors d'un certain contexte, attendant que l'utilisateur effectue une action sans être pour autant explicite. Comme exemple, nous pouvons donner
+
+>Lorsque vous jouez un sortilège, ...
+
+Il serait là aussi aisé de créer des exceptions dans le jeu au moment où le joueur lance un sort ou lorsqu'il commence son tour. Mais n'oublions pas la sandbox : nous énumérons les possibilités et non pas les restrictions. Et il existe en programmation un concept qui permet d'effectuer des executions sans pour autant modifier chaque traitement de réponse : les hooks.
+
+>Un hook (littéralement « crochet » ou « hameçon ») permet à l'utilisateur d'un logiciel de personnaliser le fonctionnement de ce dernier, en lui faisant réaliser des actions supplémentaires à des moments déterminés. Le concepteur du logiciel prévoit des hooks au long du fonctionnement de son programme, qui sont des points d'entrée vers des listes d'actions. Par défaut, le hook est généralement vide et seules les fonctionnalités de base de l'application sont exécutées. Cependant, l'utilisateur peut « accrocher » des morceaux de programme à ces hooks pour personnaliser le logiciel.
+- Wikipedia (ze référence) : https://fr.wikipedia.org/wiki/Hook_(informatique)
 
 ## Situations changeantes
 
