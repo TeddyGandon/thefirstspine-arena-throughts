@@ -8,6 +8,8 @@ Les rélfexions présentées ici découlent de nombreuses expérience dans la co
 
 ## Sandbox et boucles de gameplay
 
+Cette réflexion est plus scémantique qu'autre chose, et présente une base pour toutes les autres réflexions présentent dans ce document.
+
 ### Le problème
 
 Il est aisé de définir un jeu sur ses boucles de gameplay. Ainsi, dans TFS, il existe une boucle générale par joueur, et d'autres plus petites sur ses actions possibles. Pourtant, lors du développement d'un jeu en version numérique, il faut voir le jeu comme un ensemble de règles, un "bac à sable" où ses actions sont définies uniquement par possibilités.
@@ -86,16 +88,26 @@ else
 }
 ```
 
+devient alors :
+
 ```
 $action; // l'action qu'à effectué le joueur
 $actionWorker = Worker::factory($action);
 return $actionWorker->possibleActions();
 ```
 
-## Actions, priorisation
+## Actions, priorisation, conflits
 
 TODO
 
 ## Situations changeantes
+
+TODO
+
+### La loi de la coquille vide
+
+TODO
+
+### Le serveur a toujours raison
 
 TODO
