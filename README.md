@@ -191,10 +191,16 @@ Le client se trouve donc dans un état non définit, à la fois à jour et en re
 
 ### La loi de la coquille vide
 
-TODO
+Afin de ne perdre aucune mise à jour du client, le serveur doit pouvoir envoyer la situation du jeu dans son entiereté, et c'est au client d'effectuer toutes les interractions possibles pour rendre le résultat crédible. Cet aspect est d'autant plus important lorsque la connexion au serveur est instable, augmentant les chances de perte d'informations.
 
-### Le serveur a toujours raison
+Par exemple, avec des mises à jour de type "le joueur a posé telle carte", l'information pourrait être perdue et lorsque le joueur voudra changer la situation de cette carte, le client devra gérer le fait que chez lui l'élément en question n'existe pas. Des mises à jour complètes de la situation de jeu règlent ce problème, en simulant les interactions des utilisateurs lorsqu'un changement est détecté.
 
->Don't trust the client.
+### Optimisations des mises à jour
 
-Ce mantra est d'autant plus important dans un jeu en ligne où le joueur peut altérer les requêtes et tricher si le serveur ne vérifie pas constemment les requêtes qui lui sont envoyées. Dans notre 
+Les mises à jour d'une situation de jeu pourraient potentiellement être extrêmmement lourdes et engorger le réseau inutilement. Ces mises à jour ne peuvent avoir que des identifiants très courts, par exemple :
+
+```
+{"3-3": {"c":12,"o":{},"2-1": {"c":34,"o":{"l":-1}}
+```
+
+Les cartes et tous les objets constants (les cartes, les personnages disponibles, etc.) sont tous chargés à la connexion de l'application et sont gardés en mémoire pour être utilisés ensuite lors des mises à jour de situation de jeu.
