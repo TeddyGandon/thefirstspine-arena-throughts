@@ -185,7 +185,9 @@ Il est donc plus facile de traiter ces exceptions comme étant des "anomalies" s
 
 ## Le problème du client quantique
 
-TODO
+Dans un jeu multijoueur où la situation change constemment, le client (e.g. le jeu sur la machine de l'utilisateur, opposé au serveur) est dans un état instable constant, toujours en retard par-rapport à la situation réelle sur le serveur, avec un utilisateur toujours en avance par-rapport à la situation sur le serveur.
+
+Le client se trouve donc dans un état non définit, à la fois à jour et en retard.
 
 ### La loi de la coquille vide
 
@@ -193,4 +195,6 @@ TODO
 
 ### Le serveur a toujours raison
 
-TODO
+>Don't trust the client.
+
+Ce mantra est d'autant plus important dans un jeu en ligne où le joueur peut altérer les requêtes et tricher si le serveur ne vérifie pas constemment les requêtes qui lui sont envoyées. Dans notre 
