@@ -4,11 +4,11 @@
 
 Ce document de travail a été rédigé avant et pendant le développement de The First Spine Arena, déclinaison digitale du jeu The First Spine. Il présente les aspects techniques fondamentaux du jeu sous forme de réflexions techniques.
 
-Les rélfexions présentées ici découlent de nombreuses expériences dans la conception de jeux sur de nombreuses plateformes, avec de nombreuses technologies.
+Les réflexions présentées ici découlent de nombreuses expériences dans la conception de jeux sur de nombreuses plateformes, avec de nombreuses technologies.
 
 ## Sandbox et boucles de gameplay
 
-Cette réflexion est plus scémantique qu'autre chose, et présente une base pour toutes les autres réflexions présentent dans ce document.
+Cette réflexion est plus sémantique qu'autre chose, et présente une base pour toutes les autres réflexions présentes dans ce document.
 
 ### Le problème
 
@@ -39,7 +39,7 @@ Mais si le joueur en est à cette phase de jeu :
 ...
 ```
 
-Il s'agit du problème majeur, selon moi, des solutions pré-existantes qui existent sur Internet. Au lieu de voir les jeux sur leur plateforme comme un ensemble de règles indépendantes, ces offres proposent un modèle où le jeu est enfermé dans sa boucle de gameplay sans jamais pouvoir en sortir. Après tout, nombre de jeux cassent leurs propres boucles afin de créer la surprise.
+Il s'agit du problème majeur, selon moi, des solutions préexistantes qui existent sur Internet. Au lieu de voir les jeux sur leur plateforme comme un ensemble de règles indépendantes, ces offres proposent un modèle où le jeu est enfermé dans sa boucle de gameplay sans jamais pouvoir en sortir. Après tout, nombre de jeux cassent leurs propres boucles afin de créer la surprise.
 
 ### Voir le jeu comme un bac à sable
 
@@ -49,7 +49,7 @@ En prenant du recul sur un jeu et en le voyant comme un ensemble de possibilité
 Le joueur à fait ça, il peut désormais faire ça.
 ```
 
-Une différence qui n'est somme toute pas flagrante scémentiquement, mais qui en développement change tout :
+Une différence qui n'est somme toute pas flagrante sémentiquement, mais qui en développement change tout :
 
 ```
 if ($this->state === GameStates::PHASE_1)
@@ -119,7 +119,7 @@ Par exemple, dans TFS les possibilités offertes sont simples et peu variées :
 - Jouer un sort et/ou déplacer une créature et/ou placer une carte
 - Résoudre les confrontations
 
-Mais il y a un problème et pas des moindres : certaines actions necessitent plusieurs réponses de la part de l'utilisateur. Déplacer une créature requiert du joueur qu'il choisisse une créature, et qu'il choisisse une case à côté de cette même créature. Solution : découper les actions possibles en un ensemble d'instructions simples.
+Mais il y a un problème : certaines actions nécessitent plusieurs réponses de la part de l'utilisateur. Déplacer une créature requiert du joueur qu'il choisisse une créature, et qu'il choisisse une case à côté de cette même créature. Solution : découper les actions possibles en un ensemble d'instructions simples.
 
 ### Les instructions
 
@@ -136,7 +136,7 @@ Choisir une carte sur le plateau de jeu de type "créature"
 Choisir une case vide à côté de cette carte
 ```
 
-Envoyer l'action au jeu au lieu de ces instructions simples présentent un avantage non négligeable : pouvoir annuler l'action en cours et en choisir une autre. Une fois que les instructions sont remplies, le joueur envoie la réponse à l'action avec le résulat des instructions de cette action.
+Envoyer l'action au jeu au lieu de ces instructions simples présente un avantage non négligeable : pouvoir annuler l'action en cours et en choisir une autre. Une fois que les instructions sont remplies, le joueur envoie la réponse à l'action avec le résultat des instructions de cette action.
 
 On a donc :
 
@@ -160,13 +160,13 @@ Action à priorité de 1    =>    à garder et ne pas envoyer
 Action à priorité de 3    =>    à envoyer
 ```
 
-le jeu va demander au joueur de répondre à l'une des actions de priorité **3**. Le jeu va tout de même garder les actions de priorité **1** et **2** pour les proposer plus tard à l'utilisateur. Ce système de "priorisation par paquets" résoud la plupart des conflits que le jeu pourrait rencontrer lorsque, par exemple, plusieurs effets d'une action précédente entrent en contradiction avec l'autre, une action pouvant supprimer une autre action ou pouvant aussi en créer avec une priorité différente.
+le jeu va demander au joueur de répondre à l'une des actions de priorité **3**. Le jeu va tout de même garder les actions de priorité **1** et **2** pour les proposer plus tard à l'utilisateur. Ce système de "priorisation par paquets" résout la plupart des conflits que le jeu pourrait rencontrer lorsque, par exemple, plusieurs effets d'une action précédente entrent en contradiction avec l'autre, une action pouvant supprimer une autre action ou pouvant aussi en créer avec une priorité différente.
 
 Autre avantage non négligeable : ces actions ne respectent par à la lettre les usages de "tours" et de "phase de jeu". Ainsi, une action avec une priorité élevée pourra être demandée à un utilisateur pendant le tour du joueur actuel.
 
 ### Hooks et exceptions
 
-Le problème des actions contradictoires étant régler, certains effets peuvent générer des actions sans aucune action de l'utilisateur. C'est le cas par exemple lorsque le texte d'une carte commence par
+Le problème des actions contradictoires étant réglé, certains effets peuvent générer des actions sans aucune action de l'utilisateur. C'est le cas par exemple lorsque le texte d'une carte commence par
 
 >Au début de votre tour, ...
 
@@ -174,7 +174,7 @@ Certains effets peuvent se résoudre également lors d'un certain contexte, atte
 
 >Lorsque vous jouez un sortilège, ...
 
-Il serait là aussi aisé de créer des exceptions dans le jeu au moment où le joueur lance un sort ou lorsqu'il commence son tour. Mais n'oublions pas la sandbox : nous énumérons les possibilités et non pas les restrictions. Et il existe en programmation un concept qui permet d'effectuer des executions sans pour autant modifier chaque traitement de réponse : les hooks.
+Il serait là aussi aisé de créer des exceptions dans le jeu au moment où le joueur lance un sort ou lorsqu'il commence son tour. Mais n'oublions pas la sandbox : nous énumérons les possibilités et non pas les restrictions. Et il existe en programmation un concept qui permet d'effectuer des exécutions sans pour autant modifier chaque traitement de réponse : les hooks.
 
 >Un hook (littéralement « crochet » ou « hameçon ») permet à l'utilisateur d'un logiciel de personnaliser le fonctionnement de ce dernier, en lui faisant réaliser des actions supplémentaires à des moments déterminés. Le concepteur du logiciel prévoit des hooks au long du fonctionnement de son programme, qui sont des points d'entrée vers des listes d'actions. Par défaut, le hook est généralement vide et seules les fonctionnalités de base de l'application sont exécutées. Cependant, l'utilisateur peut « accrocher » des morceaux de programme à ces hooks pour personnaliser le logiciel.
 — Wikipedia (ze référence) : https://fr.wikipedia.org/wiki/Hook_(informatique)
@@ -185,19 +185,19 @@ Il est donc plus facile de traiter ces exceptions comme étant des "anomalies" s
 
 ## Le problème du client quantique
 
-Dans un jeu multijoueur où la situation change constemment, le client (e.g. le jeu sur la machine de l'utilisateur, opposé au serveur) est dans un état instable constant, toujours en retard par-rapport à la situation réelle sur le serveur, avec un utilisateur toujours en avance par-rapport à la situation sur le serveur.
+Dans un jeu multijoueur où la situation change constamment, le client (e.g. le jeu sur la machine de l'utilisateur, opposé au serveur) est dans un état instable constant, toujours en retard par rapport à la situation réelle sur le serveur, avec un utilisateur toujours en avance par-rapport à la situation sur le serveur.
 
-Le client se trouve donc dans un état non définit, à la fois à jour et en retard.
+Le client se trouve donc dans un état non défini, à la fois à jour et en retard.
 
 ### La loi de la coquille vide
 
-Afin de ne perdre aucune mise à jour du client, le serveur doit pouvoir envoyer la situation du jeu dans son entiereté, et c'est au client d'effectuer toutes les interractions possibles pour rendre le résultat crédible. Cet aspect est d'autant plus important lorsque la connexion au serveur est instable, augmentant les chances de perte d'informations.
+Afin de ne perdre aucune mise à jour du client, le serveur doit pouvoir envoyer la situation du jeu dans son entièreté, et c'est au client d'effectuer toutes les interactions possibles pour rendre le résultat crédible. Cet aspect est d'autant plus important lorsque la connexion au serveur est instable, augmentant les chances de perte d'informations.
 
 Par exemple, avec des mises à jour de type "le joueur a posé telle carte", l'information pourrait être perdue et lorsque le joueur voudra changer la situation de cette carte, le client devra gérer le fait que chez lui l'élément en question n'existe pas. Des mises à jour complètes de la situation de jeu règlent ce problème, en simulant les interactions des utilisateurs lorsqu'un changement est détecté.
 
 ### Optimisations des mises à jour
 
-Les mises à jour d'une situation de jeu pourraient potentiellement être extrêmmement lourdes et engorger le réseau inutilement. Ces mises à jour ne peuvent avoir que des identifiants très courts, par exemple :
+Les mises à jour d'une situation de jeu pourraient potentiellement être extrêmement lourdes et engorger le réseau inutilement. Ces mises à jour ne peuvent avoir que des identifiants très courts, par exemple :
 
 ```
 {"3-3": {"c":12,"o":{},"2-1": {"c":34,"o":{"l":-1}}
